@@ -26,7 +26,7 @@ module.exports = (opts = {}) => {
     
     return {
         postcssPlugin: 'postcss-custom-unit',
-        Once: inlineMedia
+        Once: customUnit
     };
 }
 
