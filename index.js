@@ -1,16 +1,14 @@
 var postcss = require('postcss')
 var extendDeep = require('@jsmini/extend').extendDeep;
 
-module.exports = postcss.plugin('postcss-custom-unit', function(opts) {
+module.exports = (opts = {}) => {
     opts = extendDeep({}, {
         includePath: /.*/,
         units: [], // {from, convert}
     }, opts);
 
     // Work with options here
-
-    return function(root, result) {
-
+    const customUnit = (root, result) => {
         // Transform CSS AST here
         root.walkDecls(function(decl) {
             if (!opts.includePath.test(decl.source.input.file)) {
@@ -25,4 +23,11 @@ module.exports = postcss.plugin('postcss-custom-unit', function(opts) {
             })
         });
     }
-})
+    
+    return {
+        postcssPlugin: 'postcss-custom-unit',
+        Once: inlineMedia
+    };
+}
+
+module.exports.postcss = true;
