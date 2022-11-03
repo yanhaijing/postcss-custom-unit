@@ -16,7 +16,7 @@ module.exports = (opts = {}) => {
             }
 
             opts.units.forEach(function (unit) {
-                var reg = new RegExp('(([\\d\.]+)' + unit.from + ')', 'g');
+                var reg = new RegExp('(([-\\d\.]+)' + unit.from + ')', 'g');
                 decl.value = decl.value.replace(reg, function (match, p1, p2) {
                     return unit.convert(p2);
                 });
